@@ -20,6 +20,8 @@ type ClassificationResult = { text: string; score: Map<Emotion, float> }
 [<Pojo>]
 type ClassificatorState = { categories: Map<Emotion, Map<string, int>> }
 
+type Model = ClassificationResult
+
 type Msg =
     | Classify of Classify
     | Train of Train

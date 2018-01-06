@@ -17,6 +17,7 @@
         <Compile Include="Home/View.fs" />
         <!-- Sentiment -->
         <Compile Include="Sentiment/Types.fs" />
+        <Compile Include="Sentiment/State.fs" />
         <!-- Navbar -->
         <Compile Include="Navbar/View.fs" />
         <!-- App -->
