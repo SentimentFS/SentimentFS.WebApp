@@ -6,7 +6,7 @@ open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open Types
 
-let root model dispatch =
+let root (model: Model) dispatch =
   div
     [ ]
     [ p
@@ -15,10 +15,10 @@ let root model dispatch =
             [ ClassName "input"
               Type "text"
               Placeholder "Type"
-              DefaultValue model
+              DefaultValue model.text
               AutoFocus true
               OnChange (fun ev -> !!ev.target?value |> ChangeText |> dispatch ) ] ]
       br [ ]
       span
         [ ]
-        [ str (sprintf "Hello %s" model) ] ]
+        [ str (sprintf "Hello %s" model.text) ] ]
