@@ -29,12 +29,17 @@ let classifyCmd  (msg: Classify) =
     Cmd.ofPromise classify msg Classified Error
 
 let init () : Model * Cmd<Msg> =
-  { text = ""; score = ([] |> Map.ofList) }, []
+  { text = ""; classificationResult = { text = ""; score = ([] |> Map.ofList) } }, []
 
 let update msg model : Model * Cmd<Msg> =
   match msg with
-  | Classify msg ->
-      model, classifyCmd msg
+  | ChangeText text ->
+    { model with text = text}, []
+  | Classify ->
+      model, classifyCmd { text = model.text }
   | Classified msg ->
-      msg, []
+      { model with classificationResult = msg }, []
+  | Error ex ->
+    printfn "%A" ex
+    model, []
 
