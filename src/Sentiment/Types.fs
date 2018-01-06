@@ -24,5 +24,7 @@ type Model = ClassificationResult
 
 type Msg =
     | Classify of Classify
+    | Classified of ClassificationResult
     | Train of Train
     | GetState
+    | Error of exn
