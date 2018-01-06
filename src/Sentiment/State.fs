@@ -8,7 +8,7 @@ open System.Net.Http
 open System.Net.Http.Headers
 open Fable.Core.JsInterop
 
-let serverUrl = Environment.GetEnvironmentVariable("AnalysisServerUrl")
+let serverUrl = "http://localhost:5000"
 
 let classify (msg: Classify) =
     promise {
