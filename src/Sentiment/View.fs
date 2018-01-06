@@ -19,6 +19,7 @@ let root (model: Model) dispatch =
               AutoFocus true
               OnChange (fun ev -> !!ev.target?value |> ChangeText |> dispatch ) ] ]
       br [ ]
+      button [ClassName "test"; OnClick (fun _ -> Classify |> dispatch)] [  ]
       span
         [ ]
         [ str (sprintf "Hello %s" model.text) ] ]

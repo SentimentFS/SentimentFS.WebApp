@@ -36,9 +36,10 @@ let update msg model : Model * Cmd<Msg> =
   | ChangeText text ->
     { model with text = text}, []
   | Classify ->
-      model, classifyCmd { text = model.text }
+    model, classifyCmd { text = model.text }
   | Classified msg ->
-      { model with classificationResult = msg }, []
+    printfn "%A" msg
+    { model with classificationResult = msg }, []
   | Error ex ->
     printfn "%A" ex
     model, []
