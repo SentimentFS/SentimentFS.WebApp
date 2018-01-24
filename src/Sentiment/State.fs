@@ -7,6 +7,7 @@ open Fable.PowerPack.Fetch.Fetch_types
 open System.Net.Http
 open System.Net.Http.Headers
 open Fable.Core.JsInterop
+open System.Collections.Generic
 
 let serverUrl = "http://localhost:5000"
 
@@ -29,7 +30,7 @@ let classifyCmd  (msg: Classify) =
     Cmd.ofPromise classify msg Classified Error
 
 let init () : Model * Cmd<Msg> =
-  { text = ""; classificationResult = { text = ""; score = ([] |> Map.ofList) } }, []
+  { text = ""; classificationResult = { text = ""; score = [||] } }, []
 
 let update msg model : Model * Cmd<Msg> =
   match msg with

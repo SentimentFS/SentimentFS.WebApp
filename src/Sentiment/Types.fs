@@ -1,5 +1,6 @@
 module Sentiment.Types
 open Fable.Core
+open System.Collections.Generic
 
 type Emotion =
     | VeryNegative = -2
@@ -8,6 +9,15 @@ type Emotion =
     | Positive = 1
     | VeryPositive = 2
 
+let getEmotionName emotion =
+    match emotion with
+    | Emotion.VeryNegative -> "Bardzo Negatywny"
+    | Emotion.Negative -> "Negatywny"
+    | Emotion.Neutral -> "Neutralny"
+    | Emotion.Positive -> "Pozytywny"
+    | Emotion.VeryPositive -> "Bardzo Pozytywny"
+    | _ -> "Nieznany"
+
 [<Pojo>]
 type Classify = { text : string }
 
@@ -15,7 +25,10 @@ type Classify = { text : string }
 type Train = { value: string; category: Emotion; weight : int option }
 
 [<Pojo>]
-type ClassificationResult = { text: string; score: Map<Emotion, float> }
+type Sentiment = { emotion: Emotion; probability: float }
+
+[<Pojo>]
+type ClassificationResult = { text: string; score: Sentiment array }
 
 [<Pojo>]
 type ClassificatorState = { categories: Map<Emotion, Map<string, int>> }

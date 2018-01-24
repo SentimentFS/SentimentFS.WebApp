@@ -5,6 +5,10 @@ open Fable.Core.JsInterop
 open Fable.Helpers.React
 open Fable.Helpers.React.Props
 open Types
+open System.Collections.Generic
+
+let prepareData(score: Sentiment array ) =
+    score.Length
 
 let root (model: Model) dispatch =
   div
@@ -22,4 +26,4 @@ let root (model: Model) dispatch =
       button [ClassName "test"; OnClick (fun _ -> Classify |> dispatch)] [  ]
       span
         [ ]
-        [ str (sprintf "Hello %s" model.text) ] ]
+        [ str (sprintf "Hello %A" (model.classificationResult.score |> prepareData )) ] ]
