@@ -1,14 +1,33 @@
 module Sentiment.View
 
-open Fable.Core
+open Types
 open Fable.Core.JsInterop
+open Fable.Recharts
+open Fable.Recharts.Props
 open Fable.Helpers.React
 open Fable.Helpers.React.Props
-open Types
-open System.Collections.Generic
+module SVG = Fable.Helpers.React.Props
+module R = Fable.Helpers.React
+module P = R.Props
 
 let prepareData(score: Sentiment array ) =
-    score.Length
+    score |> Array.map(fun x -> { name = x.emotion |> getEmotionName; prob = x.probability})
+let margin t r b l =
+    Chart.Margin { top = t; bottom = b; right = r; left = l }
+
+let emotionChart(chartData: ChartData array) =
+    barChart
+        [ margin 5. 20. 5. 0.
+          Chart.Width 600.
+          Chart.Height 300.
+          Chart.Data chartData ]
+        [ xaxis [Cartesian.DataKey "name"] []
+          yaxis [] []
+          tooltip [] []
+          legend [] []
+          cartesianGrid [StrokeDasharray "5 5"] []
+          bar [Cartesian.DataKey "prob"; Cartesian.StackId "a"; P.Fill "#8884d8"] []
+]
 
 let root (model: Model) dispatch =
   div
@@ -26,4 +45,4 @@ let root (model: Model) dispatch =
       button [ClassName "test"; OnClick (fun _ -> Classify |> dispatch)] [  ]
       span
         [ ]
-        [ str (sprintf "Hello %A" (model.classificationResult.score |> prepareData )) ] ]
+        [ emotionChart(model.classificationResult.score |> prepareData) ] ]

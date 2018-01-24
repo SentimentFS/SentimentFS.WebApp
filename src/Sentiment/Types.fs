@@ -33,6 +33,8 @@ type ClassificationResult = { text: string; score: Sentiment array }
 [<Pojo>]
 type ClassificatorState = { categories: Map<Emotion, Map<string, int>> }
 
+type ChartData = { name: string; prob: float }
+
 type Model = { text: string; classificationResult: ClassificationResult }
 
 type Msg =
