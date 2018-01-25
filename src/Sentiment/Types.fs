@@ -1,6 +1,5 @@
 module Sentiment.Types
 open Fable.Core
-open System.Collections.Generic
 
 type Emotion =
     | VeryNegative = -2
