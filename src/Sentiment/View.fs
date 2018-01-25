@@ -37,12 +37,12 @@ let root (model: Model) dispatch =
         [ input
             [ ClassName "input"
               Type "text"
-              Placeholder "Type"
+              Placeholder "Wpisz tekst"
               DefaultValue model.text
               AutoFocus true
               OnChange (fun ev -> !!ev.target?value |> ChangeText |> dispatch ) ] ]
       br [ ]
-      button [ClassName "button"; Value "Szukaj" ; OnClick (fun _ -> Classify |> dispatch)] [  ]
+      button [ClassName "button"; Type "button"; Value "Szukaj"; OnClick (fun _ -> Classify |> dispatch)] [ str "Szukaj" ]
       span
         [ ]
         [ emotionChart(model.classificationResult.score |> prepareData) ] ]
