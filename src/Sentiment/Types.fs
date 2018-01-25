@@ -34,12 +34,13 @@ type ClassificatorState = { categories: Map<Emotion, Map<string, int>> }
 
 type ChartData = { name: string; prob: float }
 
-type Model = { text: string; classificationResult: ClassificationResult }
+type Model = { text: string; trainData: Train option; classificationResult: ClassificationResult }
 
 type Msg =
     | Classify
     | Classified of ClassificationResult
     | ChangeText of string
-    | Train of Train
+    | Train
+    | Trained of bool
     | GetState
     | Error of exn
