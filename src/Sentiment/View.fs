@@ -15,7 +15,7 @@ let prepareData(score: Sentiment array ) =
 let margin t r b l =
     Chart.Margin { top = t; bottom = b; right = r; left = l }
 
-let emotionChart(chartData: ChartData array) =
+let emotionBarChart(chartData: ChartData array) =
     barChart
         [ margin 5. 20. 5. 0.
           Chart.Width 600.
@@ -42,6 +42,7 @@ let emotionRadarChart(chartData: ChartData array) =
         ]
 
 let root (model: Model) dispatch =
+  let chartData = (model.classificationResult.score |> prepareData)
   div
     [ ]
     [ p
@@ -55,6 +56,8 @@ let root (model: Model) dispatch =
               OnChange (fun ev -> !!ev.target?value |> ChangeText |> dispatch ) ] ]
       br [ ]
       button [ClassName "button"; Type "button"; Value "Szukaj"; OnClick (fun _ -> Classify |> dispatch)] [ str "Szukaj" ]
-      span
+      div
         [ ]
-        [ emotionRadarChart(model.classificationResult.score |> prepareData) ] ]
+        [ emotionRadarChart(chartData)
+          emotionBarChart(chartData)
+        ] ]
