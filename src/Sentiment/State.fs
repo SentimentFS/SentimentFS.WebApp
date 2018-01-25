@@ -1,13 +1,9 @@
 module Sentiment.State
 open Types
 open Elmish
-open System
 open Fable.PowerPack
 open Fable.PowerPack.Fetch.Fetch_types
-open System.Net.Http
-open System.Net.Http.Headers
 open Fable.Core.JsInterop
-open System.Collections.Generic
 
 let serverUrl = "http://localhost:5000"
 
