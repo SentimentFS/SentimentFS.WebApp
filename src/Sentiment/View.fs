@@ -27,7 +27,19 @@ let emotionChart(chartData: ChartData array) =
           legend [] []
           cartesianGrid [StrokeDasharray "5 5"] []
           bar [Cartesian.DataKey "prob"; Cartesian.StackId "a"; P.Fill "#8884d8"] []
-]
+        ]
+
+let emotionRadarChart(chartData: ChartData array) =
+    radarChart
+        [ margin 5. 20. 5. 0.
+          Chart.Width 600.
+          Chart.Height 300.
+          Chart.Data chartData ]
+        [ polarGrid [][]
+          polarAngleAxis [ Polar.DataKey "name" ] []
+          polarRadiusAxis [] []
+          radar [ Name "Emotions"; Polar.DataKey "prob"; P.Stroke "#8884d8"; P.Fill "#8884d8"; P.FillOpacity 0.6; ] []
+        ]
 
 let root (model: Model) dispatch =
   div
@@ -45,4 +57,4 @@ let root (model: Model) dispatch =
       button [ClassName "button"; Type "button"; Value "Szukaj"; OnClick (fun _ -> Classify |> dispatch)] [ str "Szukaj" ]
       span
         [ ]
-        [ emotionChart(model.classificationResult.score |> prepareData) ] ]
+        [ emotionRadarChart(model.classificationResult.score |> prepareData) ] ]
