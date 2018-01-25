@@ -11,7 +11,7 @@ let pageParser: Parser<Page->Page,Page> =
   oneOf [
     map About (s "about")
     map Counter (s "counter")
-    map Sentiment (s "home")
+    map Sentiment (s "sentiment")
   ]
 
 let urlUpdate (result: Option<Page>) model =
